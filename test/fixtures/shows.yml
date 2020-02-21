@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  movie: one
+  theatre: one
+  show_date: 2020-02-21
+  timing: one
+  available_seats: 1
+  seat_price: 1.5
+
+two:
+  movie: two
+  theatre: two
+  show_date: 2020-02-21
+  timing: two
+  available_seats: 1
+  seat_price: 1.5
