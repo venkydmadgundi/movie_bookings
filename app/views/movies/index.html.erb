@@ -6,13 +6,43 @@
 <div class="card">
   <div class=" card-block">
     <h4 class="card-title"><%= movie.name %></h4>
-    <p class="card-text">This movie is running in <%= movie.theatres.count %> theatres in <%= movie.shows.count %> Shows , price for each ticket is <%= price_helper(movie.shows.first.seat_price) %></p>
-    <%= link_to movie_path(movie) do %>
+
+    <% movie.theatres.uniq.each do | theatre| %>
+      <p class="card-text">
+        <%= theatre.name %> Seats: <%=theatre.seats%>
+        <table class='table'>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Seat Price</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+        <% theatre.shows.where(movie_id: movie.id).each do |show| %>
+          <tr>
+                <td><%= show.show_date %></td>
+                <td><%= show.timing.start_time.strftime("%H:%M") %></td>
+                <td><%= show.timing.end_time.strftime("%H:%M") %></td>
+                <td><%= show.seat_price %></td>
+                <td><%= link_to new_booking_path(show_id: show.id) do %>
       <button class="btn btn-primary">Book Movie</button>
+    <% end %></td>
+              
+        </tr>
+        <% end %>
+
+            </tbody>
+          </table>
+      </p>
     <% end %>
+    
   </div>
    <div class="card-footer text-muted">
-    released 2 days back
+   
   </div>
 </div>
 </div>

@@ -25,6 +25,7 @@
 
 
 slots_price = {7=>100,10=>150,13=>200,16=>250,19=>250,22=>200}
+
 @days = [Time.now.yesterday.day,Time.now.day,Time.now.tomorrow.day]
 @month = Time.now.strftime("%m")
 
@@ -41,22 +42,22 @@ movies = Movie.create([{ name: "Ghost Stories",director_name:"Karan Johar, Dibak
 { name: "Panga",director_name: "Ashwiny Iyer Tiwari", release_date: Date.today - 9.day, is_active: true},
 { name: "Happy Hardy and Heer",director_name:"Raka", release_date: Date.today - 10.day, is_active: true}])
 
-theaters = Theatre.create!([{name: 'E-Square', seats: 50},
+theatres = Theatre.create!([{name: 'E-Square', seats: 50},
 				{name: 'Big Cinema', seats: 75},
 				{name: 'PVR Cinema', seats: 80},
 				{name: 'INOX Theater', seats: 65},
 				{name: 'Ashoka Talkies', seats: 70}
 				])
 
-@id = Movie.all.map(&:id)
-
 Theatre.all.each do |theatre|
-	@days.each do |day|
-		slots_price.each do |slot, price|
-			timing = Timing.create({start_time: Time.new(Time.now.year, Time.now.month, day,slot,0), end_time: Time.new(Time.now.year, Time.now.month, day,slot+2,0)})
-			Movie.active.each do |movie|				
-				Show.create!(movie: movie, theatre: theatre, timing: timing, seat_price: price, show_date: Time.new(Time.now.year, Time.now.month, day,slot,0).strftime("%d-%m-%Y"), available_seats: theatre.seats - 1 )
-			end
+	index = 0
+	slots_price.each do |slot, price|
+		index = 0 if index == 3
+		timing = Timing.create({start_time: Time.new(Time.now.year, Time.now.month, @days[index],slot,0), end_time: Time.new(Time.now.year, Time.now.month, @days[index],slot+2,0)})
+		Movie.active.each do |movie|		
+			Show.create!(movie: movie, theatre: theatre, timing: timing, seat_price: price, show_date: Time.new(Time.now.year, Time.now.month, @days[index],slot,0).strftime("%d-%m-%Y"), available_seats: theatre.seats - 1 )
 		end
+		index += 1
 	end
 end
+
