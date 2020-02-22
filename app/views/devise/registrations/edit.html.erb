@@ -31,6 +31,12 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.radio_button :gender, 'male', class: 'form-control m-2' %> Male
+    <%= f.radio_button :gender, 'female', class: 'form-control m-2' %> Female
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

@@ -26,7 +26,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'devise'
-gem 'devise-bootstrap-views'
+gem 'therubyracer'
+gem "twitter-bootstrap-rails"
+gem 'pry'
 
 
 # Reduces boot times through caching; required in config/boot.rb

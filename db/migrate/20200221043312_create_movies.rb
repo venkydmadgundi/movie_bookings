@@ -4,7 +4,7 @@ class CreateMovies < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :director_name
       t.date :release_date
-      t.boolean :is_active
+      t.boolean :is_active, default: false
 
       t.timestamps
     end
