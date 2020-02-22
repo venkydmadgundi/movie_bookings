@@ -17,6 +17,11 @@ class Show < ApplicationRecord
   	100 - (self.bookings_count || 0)
   end
 
+  def valid_showtime?
+    show_time = Time.new(self.show_date.year, self.show_date.month, self.show_date.day,self.timing.start_time.utc.strftime("%H"),self.timing.start_time.utc.strftime("%M"))
+    show_time > Time.now
+  end
+
   private
 
   def validate_booking

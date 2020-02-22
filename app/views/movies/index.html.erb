@@ -17,7 +17,9 @@
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Seat Price</th>
+                <% if user_signed_in? %>
                 <th>Action</th>
+                <% end %>
               </tr>
             </thead>
             <tbody>
@@ -28,10 +30,13 @@
                 <td><%= show.timing.start_time.strftime("%H:%M") %></td>
                 <td><%= show.timing.end_time.strftime("%H:%M") %></td>
                 <td><%= show.seat_price %></td>
-                <td><%= link_to new_booking_path(show_id: show.id) do %>
-      <button class="btn btn-primary">Book Movie</button>
-    <% end %></td>
-              
+                <% if user_signed_in? && show.valid_showtime? %>
+                <td>
+                  <%= link_to new_booking_path(show_id: show.id) do %>
+                    <button class="btn btn-primary">Book</button>
+                  <% end %>
+                </td>
+                <% end %>
         </tr>
         <% end %>
 
