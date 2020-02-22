@@ -11,28 +11,28 @@ slots_price = {7=>100,10=>150,13=>200,16=>250,19=>250,22=>200}
 days = [Time.now.yesterday.day,Time.now.day,Time.now.tomorrow.day]
 
 movies = Movie.create([	{ name: "Ghost Stories",director_name:"Karan Johar, Dibakar Banerjee, Zoya Akhtar, Anurag Kashyap", release_date: Date.today.yesterday, is_active: true}, 
-						{ name: "Bhangra Paa Le",director_name:"Sneha Taurani", release_date: Date.today - 2.day, is_active: true},
-						{ name: "Sab Kushal Mangal",director_name:"Karan Vishwanath Kashyap", release_date: Date.today - 3.day, is_active: false},
-						{ name: "Shimla Mirchi",director_name:"Ramesh Sippy", release_date: Date.today - 4.day, is_active: true},
-						{ name: "Tanhaji", director_name:"Om Raut", release_date: Date.today - 5.day, is_active: true},
-						{ name: "Chhapaak", director_name: "Meghna Gulzar", release_date: Date.today - 6.day, is_active: false},
-						{ name: "Jai Mummy Di",director_name: "Navjot Gulati", release_date: Date.today - 7.day, is_active: false},
-						{ name: "Street Dancer 3D",director_name: "Remo D'Souza", release_date: Date.today - 8.day, is_active: true},
-						{ name: "Panga",director_name: "Ashwiny Iyer Tiwari", release_date: Date.today - 9.day, is_active: true},
-						{ name: "Happy Hardy and Heer",director_name:"Raka", release_date: Date.today - 10.day, is_active: true}])
+	{ name: "Bhangra Paa Le",director_name:"Sneha Taurani", release_date: Date.today - 2.day, is_active: true},
+	{ name: "Sab Kushal Mangal",director_name:"Karan Vishwanath Kashyap", release_date: Date.today - 3.day, is_active: false},
+	{ name: "Shimla Mirchi",director_name:"Ramesh Sippy", release_date: Date.today - 4.day, is_active: true},
+	{ name: "Tanhaji", director_name:"Om Raut", release_date: Date.today - 5.day, is_active: true},
+	{ name: "Chhapaak", director_name: "Meghna Gulzar", release_date: Date.today - 6.day, is_active: false},
+	{ name: "Jai Mummy Di",director_name: "Navjot Gulati", release_date: Date.today - 7.day, is_active: false},
+	{ name: "Street Dancer 3D",director_name: "Remo D'Souza", release_date: Date.today - 8.day, is_active: true},
+	{ name: "Panga",director_name: "Ashwiny Iyer Tiwari", release_date: Date.today - 9.day, is_active: true},
+	{ name: "Happy Hardy and Heer",director_name:"Raka", release_date: Date.today - 10.day, is_active: true}])
 
 theatres = Theatre.create!([{name: 'E-Square', seats: 50},
-							{name: 'Big Cinema', seats: 75},
-							{name: 'PVR Cinema', seats: 80},
-							{name: 'INOX Theater', seats: 65},
-							{name: 'Ashoka Talkies', seats: 70}])
+	{name: 'Big Cinema', seats: 75},
+	{name: 'PVR Cinema', seats: 80},
+	{name: 'INOX Theater', seats: 65},
+	{name: 'Ashoka Talkies', seats: 70}])
 
 def get_show_time(show_hour)
 	case show_hour
-		when 0..11 then "Morning"
-		when 12..15 then "Afternoon"
-		when 16..20 then "Evening"
-		when 21..23 then "Night"
+	when 0..11 then "Morning"
+	when 12..15 then "Afternoon"
+	when 16..20 then "Evening"
+	when 21..23 then "Night"
 	end
 end
 

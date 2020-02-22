@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>MovieBookings</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>MovieBookings</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
+<body>
 
-    <div>
+  <div>
     <%= nav_bar :fixed => :top, :responsive => true do %>
-      <%= menu_group do %>
-        <%= menu_item "Home", root_path %>
-        <%= menu_divider %>
-        <%= menu_item "Bookings", bookings_path if user_signed_in? %>
-      <% end %>
-      <%= menu_group :pull => :right do %>
-        <% if user_signed_in? %>
-          <%= menu_item "Log Out", destroy_user_session_path %>
-        <% else %>
-          <%= menu_item "Login", new_user_session_path  %> |
-          <%= menu_item "Register", new_user_registration_path  %>
-        <% end %>
-      <% end %>
+    <%= menu_group do %>
+    <%= menu_item "Home", root_path %>
+    <%= menu_divider %>
+    <%= menu_item "Bookings", bookings_path if user_signed_in? %>
     <% end %>
-    </div>
-    
-    <div class="container">
-      <div class="row">
-        <% if notice %>
-          <p id="notice" class="alert alert-success"<%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p id="error_explanation" class="alert alert-danger"><%= alert %></p>
-        <% end %>
-        <div class="span9"><%= yield %></div>
-        <div class="span3">
+    <%= menu_group :pull => :right do %>
+    <% if user_signed_in? %>
+    <%= menu_item "Log Out", destroy_user_session_path %>
+    <% else %>
+    <%= menu_item "Login", new_user_session_path  %> |
+    <%= menu_item "Register", new_user_registration_path  %>
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+  
+  <div class="container">
+    <div class="row" style="padding-top: 50px;">
+      <% if notice %>
+      <p id="notice" class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+      <p id="error_explanation" class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <div class="span9"><%= yield %></div>
+        <!-- <div class="span3">
           <h2>About Us</h2>
           Movie Booking System
-        </div>
+        </div> -->
       </div>
     </div>
   </body>
-</html>
+  </html>
