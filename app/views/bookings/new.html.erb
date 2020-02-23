@@ -1,5 +1,27 @@
+<script type="text/javascript">
+$(document).ready(function(){
+    $('input#booking_seats').on('change keyup', function() {
+        const numberOfSeats = $('input#booking_seats').val();
+        const seatPrice = <%= @show.seat_price %>;
+        const discountPer = <%= current_user.gender.downcase == "female" ? 5 : 0 %>;
+        let total = (numberOfSeats*seatPrice);
+        if ( discountPer > 0 ){
+        	total = total - (total/100) * discountPer;
+        }
+        $('input#booking_total_price').val(total)
+    }); 
+});
+</script>
 <div class="row">
-	<h2>Movie: <%= @show.movie.name%></h2>
+	<h2>Booking Ticket for Movie: <%= @show.movie.name%></h2>
+	<table class='table'>
+		<tbody>
+			<tr><td>Date: </td><td><%= @show.show_date %></td></tr>
+			<tr><td>Start Time: </td><td><%= @show.timing.start_time.strftime("%H:%M") %></td></tr>
+			<tr><td>End Time: </td><td><%= @show.timing.end_time.strftime("%H:%M") %></td></tr>
+			<tr><td>Price: </td><td><%= @show.seat_price %></td></tr>
+		</tbody>
+	</table>
 	<%= render 'form', booking: @booking, show: @show %>
 	<%= link_to 'Back', bookings_path %>
 </div>

@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    @bookings = current_user.bookings.includes(:show)
   end
 
   # GET /bookings/1
@@ -21,13 +21,15 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1/edit
   def edit
+    @show = @booking.show
   end
 
   # POST /bookings
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
-
+    @booking.user = current_user
+    @booking.show = Show.find(params[:show_id])
     respond_to do |format|
       if @booking.save
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
@@ -71,6 +73,6 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:user_id, :show_id, :seats)
+      params.require(:booking).permit(:user_id, :show_id, :seats, :total_price, :status)
     end
 end

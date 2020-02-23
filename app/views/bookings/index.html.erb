@@ -5,27 +5,35 @@
 <table class='table'>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Show</th>
+      <th>Movie</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th>Seats</th>
-      <th colspan="3"></th>
+      <th>Ticket Price</th>
+      <th>Status</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @bookings.each do |booking| %>
-      <tr>
-        <td><%= booking.user_id %></td>
-        <td><%= booking.show_id %></td>
-        <td><%= booking.seats %></td>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= booking.show.movie.name %></td>
+      <td><%= booking.show.show_date %></td>
+      <td><%= booking.show.timing.start_time.strftime("%H:%M") %></td>
+      <td><%= booking.show.timing.end_time.strftime("%H:%M") %></td>
+      <td><%= booking.seats %></td>
+      <td><%= '%.2f' % booking.total_price %></td>
+      <td><%= booking.status %>ed</td>
+      <td><% if booking.status.downcase == "book" && booking.show.valid_showtime?%>
+        <%= link_to edit_booking_path(id: booking.id, show_id: booking.show_id) do %>
+        <button class="btn btn-primary">Cancel</button>
+        <% end %>
+        <% end %>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Booking', new_booking_path %>

@@ -1,6 +1,23 @@
-<h1>Editing Booking</h1>
+<div class="row">
+	<h2>Canceling Ticket for Movie: <%= @show.movie.name%></h2>
+	<table class='table'>
+		<tbody>
+			<tr><td>Date: </td><td><%= @show.show_date %></td></tr>
+			<tr><td>Start Time: </td><td><%= @show.timing.start_time.strftime("%H:%M") %></td></tr>
+			<tr><td>End Time: </td><td><%= @show.timing.end_time.strftime("%H:%M") %></td></tr>
+			<tr><td>Price: </td><td><%= @show.seat_price %></td></tr>
+			<tr><td>Seats: </td><td><%= @booking.seats %></td></tr>
+			<tr><td>Total: </td><td><%= @booking.total_price %></td></tr>
+		</tbody>
+	</table>
 
-<%= render 'form', booking: @booking %>
+	<%= form_with(model: @booking, local: true) do |form| %>
+	<div class="actions">
+		<% ticket_action = controller.action_name == "new" ? "Book" : "Cancel" %>
+		<%= form.hidden_field :status, value: ticket_action %>
+		<%= form.submit "#{ticket_action} Ticket", class: 'btn btn-primary' %>
+	</div>
+	<% end %>
+	<%= link_to 'Back', bookings_path %>
+</div>
 
-<%= link_to 'Show', @booking %> |
-<%= link_to 'Back', bookings_path %>
