@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Movie Booking Website
+  Simple Ticketing System
+  (Note: Added CDN for jQuery)
 
-Things you may want to cover:
+**Setting up**
+1. Clone the Repository
 
-* Ruby version
+2. Run the command to install gem dependencies in rails project folder:
+```bash
+bundle install
+```
 
-* System dependencies
+3. Next, run these commands to migrate records and populate the database with seeds.rb:
+```bash
+bundle exec rails db:create db:migrate db:seed
+```
 
-* Configuration
+4. Next start the server with the following command:
+```bash
+rails s
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+5. Rails server is up and running now.
