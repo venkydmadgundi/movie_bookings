@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_053408) do
     t.bigint "user_id", null: false
     t.bigint "show_id", null: false
     t.integer "seats"
-    t.decimal "total_price", precision: 6, scale: 2
+    t.decimal "total_price", precision: 8, scale: 2
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

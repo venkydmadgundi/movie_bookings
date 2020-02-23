@@ -12,6 +12,7 @@ class Show < ApplicationRecord
   before_save :validate_booking
 
   scope :theatre_name, -> (name){ where(theatre: Theatre.find_by(name: name )) }
+  default_scope { order("show_date DESC") }
 
   def seats
   	100 - (self.bookings_count || 0)

@@ -4,6 +4,8 @@ class Booking < ApplicationRecord
 
   before_save :validate_booking
 
+  default_scope { order("updated_at DESC") }
+
   def self.create_booking(booking)
     Booking.transaction do
       booking.save!
