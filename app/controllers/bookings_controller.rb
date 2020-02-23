@@ -30,8 +30,9 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     @booking.show = Show.find(params[:show_id])
+    @booking.show.available_seats -= @booking.seats
     respond_to do |format|
-      if @booking.save
+      if @booking.save && @booking.show.save
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
@@ -46,22 +47,14 @@ class BookingsController < ApplicationController
   def update
     respond_to do |format|
       if @booking.update(booking_params)
+        @booking.show.available_seats += @booking.seats
+        @booking.show.save
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
         format.html { render :edit }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /bookings/1
-  # DELETE /bookings/1.json
-  def destroy
-    @booking.destroy
-    respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
